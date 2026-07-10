@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kavor Industries | Engineering the Future of Industry</title>
   <meta name="description" content="Kavor Industries delivers engineering expertise, industrial procurement, and global trade solutions for modern businesses." />
+  
+  <!-- Main SVG Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <!-- Google Search Favicon Fallback (Square PNG) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png" />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
@@ -163,11 +168,17 @@
           </div>
           <div class="contact-box">
             <strong>Markets</strong>
-            <span>India • Germany • Global</span>
+            <a href="https://kavorindustries.com">India • Germany • Global</a>
           </div>
         </div>
 
-        <form class="contact-form" onsubmit="return handleForm(event)">
+        <!-- Functional form connected to Web3Forms (Free service) -->
+        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+          <!-- Form configuration -->
+          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+          <input type="hidden" name="subject" value="New Inquiry from Kavor Industries Website" />
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+
           <label>Full Name <input type="text" name="name" required /></label>
           <label>Email <input type="email" name="email" required /></label>
           <label>Company <input type="text" name="company" /></label>
@@ -181,7 +192,6 @@
           </label>
           <label>Message <textarea name="message" rows="5" required></textarea></label>
           <button type="submit" class="btn">Send Inquiry</button>
-          <p class="form-note">Demo form: connect this to hosting/email service before launch.</p>
         </form>
       </div>
     </section>
