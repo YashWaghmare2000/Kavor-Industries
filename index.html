@@ -172,10 +172,28 @@
         </div>
 
         <!-- Modernized Professional Inquiry Form via Formspree -->
-        <form class="contact-form" action="https://formspree.io/f/info@kavorindustries.com" method="POST">
+       <!-- Modernized Professional Inquiry Form - 100% No Account Required -->
+        <form class="contact-form" action="mailto:info@kavorindustries.com" method="POST" enctype="text/plain">
           <h3 style="margin-top: 0; margin-bottom: 1.5rem; font-family: 'Montserrat', sans-serif;">Project Inquiry Form</h3>
           
           <label>Full Name 
+            <input type="text" name="Name" placeholder="John Doe" />
+          </label>
+          
+          <label>Email ID <span style="color: #ff4d4d; font-weight: bold;">*</span> <span style="font-size: 0.8rem; color: #777;">(Compulsory to submit form)</span>
+            <input type="email" name="Email" placeholder="name@company.com" required style="border: 1px solid #ff4d4d;" />
+          </label>
+          
+          <label>Company Name 
+            <input type="text" name="Company" placeholder="Company Ltd." />
+          </label>
+          
+          <label>Message 
+            <textarea name="Message" rows="5" placeholder="How can we assist your business operations?" required></textarea>
+          </label>
+          
+          <button type="submit" class="btn" style="width: 100%; justify-content: center; margin-top: 1rem;">Send Inquiry →</button>
+        </form>          <label>Full Name 
             <input type="text" name="name" placeholder="John Doe" />
           </label>
           
