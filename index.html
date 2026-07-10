@@ -6,10 +6,9 @@
   <title>Kavor Industries | Engineering the Future of Industry</title>
   <meta name="description" content="Kavor Industries delivers engineering expertise, industrial procurement, and global trade solutions for modern businesses." />
   
-  <!-- SEO & Favicon Configurations for Google Search Indexing -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon" sizes="any">
-  <link rel="icon" href="favicon.png" type="image/png" sizes="32x32">
-  <link rel="apple-touch-icon" href="favicon.png">
+  <!-- Explicit Favicon configuration for Google Search Results -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.svg" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,7 +76,7 @@
     .industry-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem; }
     .industry-grid span { background: #fff; border: 1px solid var(--border-color); padding: 1rem; text-align: center; border-radius: 4px; font-weight: 500; }
 
-    /* Unified Form Styling (Fixed Multi-Column Bug) */
+    /* Unified Form Styling */
     .contact-form { background: #0f172a; color: #fff; padding: 3rem; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; text-align: left; }
     .contact-form label { display: block; margin-bottom: 1.25rem; font-size: 0.9rem; color: #cbd5e1; font-weight: 500; }
     .contact-form label span.required-star { color: var(--accent-red); font-weight: bold; }
@@ -128,7 +127,8 @@
   <header class="site-header" id="top">
     <div class="container navbar">
       <a href="#top" class="brand" aria-label="Kavor Industries home">
-        <img src="favicon.png" alt="Kavor Industries" />
+        <!-- Reverted directly to your actual working vector asset -->
+        <img src="favicon.svg" alt="Kavor Industries" />
         <span>
           <strong>Kavor</strong>
           <small>Industries</small>
@@ -257,24 +257,24 @@
           <p style="font-weight: 700; color: var(--accent-orange); font-size: 1.05rem;">info@kavorindustries.com • Europe • Asia • Global</p>
         </div>
 
-        <!-- Fully Realigned Single Column Native Intake Form -->
-        <form class="contact-form" action="mailto:info@kavorindustries.com" method="POST" enctype="text/plain">
+        <!-- Security Warning Fixed: Using safe script handling instead of form action handlers -->
+        <form class="contact-form" id="inquiryForm" onsubmit="handleInquirySubmit(event)">
           <h3 style="margin-top: 0; margin-bottom: 2rem; font-family: 'Montserrat', sans-serif; font-size: 1.4rem; text-align: center; letter-spacing: 0.5px;">Project Inquiry Form</h3>
           
           <label>Full Name 
-            <input type="text" name="Client Name" placeholder="John Doe" />
+            <input type="text" id="clientName" placeholder="John Doe" />
           </label>
           
           <label>Email ID <span class="required-star">*</span><span class="required-note">(Compulsory to submit form)</span>
-            <input type="email" name="Reply-To Email" class="compulsory-field" placeholder="name@company.com" required />
+            <input type="email" id="clientEmail" class="compulsory-field" placeholder="name@company.com" required />
           </label>
           
           <label>Company Name 
-            <input type="text" name="Company Name" placeholder="Company Ltd." />
+            <input type="text" id="companyName" placeholder="Company Ltd." />
           </label>
           
           <label>Service Vertical Required
-            <select name="Selected Service">
+            <select id="selectedService">
               <option>Engineering Services</option>
               <option>Industrial Procurement</option>
               <option>Global Trade</option>
@@ -283,7 +283,7 @@
           </label>
           
           <label>Message Content
-            <textarea name="Inquiry Details" rows="5" placeholder="Describe your logistics, timeline, or engineering needs..." required></textarea>
+            <textarea id="inquiryDetails" rows="5" placeholder="Describe your logistics, timeline, or engineering needs..." required></textarea>
           </label>
           
           <button type="submit" class="btn" style="width: 100%; justify-content: center; margin-top: 1rem; padding: 1rem;">Send Inquiry →</button>
@@ -291,7 +291,7 @@
       </div>
     </section>
 
-    <!-- Compliance Section (Terms and Privacy Layout) -->
+    <!-- Compliance Section -->
     <section class="compliance-section" id="compliance">
       <div class="container compliance-grid">
         <div>
@@ -345,6 +345,29 @@
   </footer>
 
   <script>
+    // Safe Native Email Dispatch Script (Bypasses Chrome Mixed Content Alerts)
+    function handleInquirySubmit(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('clientName').value || "Not Provided";
+      const email = document.getElementById('clientEmail').value;
+      const company = document.getElementById('companyName').value || "Not Provided";
+      const service = document.getElementById('selectedService').value;
+      const details = document.getElementById('inquiryDetails').value;
+      
+      let bodyText = `Project Inquiry Form Submission:\n\n`;
+      bodyText += `Client Name: ${name}\n`;
+      bodyText += `Reply-To Email: ${email}\n`;
+      bodyText += `Company Name: ${company}\n`;
+      bodyText += `Service Vertical Required: ${service}\n\n`;
+      bodyText += `Inquiry Details:\n${details}\n`;
+      
+      const mailtoUrl = `mailto:info@kavorindustries.com?subject=${encodeURIComponent('Kavor Project Inquiry - ' + company)}&body=${encodeURIComponent(bodyText)}`;
+      
+      // Fires client system intent cleanly without navigating away or raising security alerts
+      window.location.href = mailtoUrl;
+    }
+
     // Cookie Banner Local Storage Logic
     document.addEventListener("DOMContentLoaded", function() {
       const banner = document.getElementById("cookieBanner");
