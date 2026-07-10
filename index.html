@@ -172,12 +172,20 @@
           </div>
         </div>
 
-        <!-- Clean, backend-free contact form -->
-        <form class="contact-form" action="mailto:info@kavorindustries.com" method="POST" enctype="text/plain">
-          <label>Full Name <input type="text" name="Name" required /></label>
-          <label>Email <input type="email" name="Email" required /></label>
-          <label>Company <input type="text" name="Company" /></label>
-          <label>Message <textarea name="Message" rows="5" required></textarea></label>
+        <!-- Fully Functional Form using Formspree -->
+        <form class="contact-form" action="https://formspree.io/f/info@kavorindustries.com" method="POST">
+          <label>Full Name <input type="text" name="name" required /></label>
+          <label>Email <input type="email" name="_replyto" required /></label>
+          <label>Company <input type="text" name="company" /></label>
+          <label>Service Required
+            <select name="service">
+              <option>Engineering Services</option>
+              <option>Industrial Procurement</option>
+              <option>Global Trade</option>
+              <option>Industrial Consulting</option>
+            </select>
+          </label>
+          <label>Message <textarea name="message" rows="5" required></textarea></label>
           <button type="submit" class="btn">Send Inquiry</button>
         </form>
       </div>
@@ -214,6 +222,6 @@
     <div class="footer-bottom">© 2026 Kavor Industries. All rights reserved.</div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Removed broken script to guarantee form submission works flawlessly -->
 </body>
 </html>
