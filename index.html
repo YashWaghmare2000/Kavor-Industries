@@ -21,7 +21,7 @@
       --text-main: #1e293b;
       --accent-orange: #e17014;
       --accent-red: #ff4d4d;
-      --border-color: #cbd5e1;
+      --border-color: #334155;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -74,16 +74,22 @@
 
     /* Industry list */
     .industry-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem; }
-    .industry-grid span { background: #fff; border: 1px solid var(--border-color); padding: 1rem; text-align: center; border-radius: 4px; font-weight: 500; }
+    .industry-grid span { background: #fff; border: 1px solid #cbd5e1; padding: 1rem; text-align: center; border-radius: 4px; font-weight: 500; }
 
     /* Unified Form Styling */
     .contact-form { background: #0f172a; color: #fff; padding: 3rem; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; text-align: left; }
-    .contact-form label { display: block; margin-bottom: 1.25rem; font-size: 0.9rem; color: #cbd5e1; font-weight: 500; }
-    .contact-form label span.required-star { color: var(--accent-red); font-weight: bold; }
-    .contact-form label span.required-note { font-size: 0.75rem; color: #94a3b8; font-weight: normal; margin-left: 0.5rem; }
-    .contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 0.85rem; margin-top: 0.5rem; border-radius: 4px; border: 1px solid #334155; background: #1e293b; color: #fff; font-family: inherit; font-size: 0.95rem; display: block; }
+    .contact-form label { display: block; margin-bottom: 1.25rem; font-size: 0.9rem; color: #cbd5e1; font-weight: 500; position: relative; }
+    .contact-form label span.required-star { color: var(--accent-red); font-weight: bold; margin-left: 2px; }
+    
+    /* Dynamic Error Popup Element */
+    .error-note { font-size: 0.8rem; color: var(--accent-red); font-weight: 600; margin-left: 10px; display: none; }
+    .error-note.active { display: inline-block; animation: fadeIn 0.3s ease; }
+
+    .contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 0.85rem; margin-top: 0.5rem; border-radius: 4px; border: 1px solid var(--border-color); background: #1e293b; color: #fff; font-family: inherit; font-size: 0.95rem; display: block; }
     .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent-orange); }
-    .contact-form input.compulsory-field { border: 1px solid var(--accent-red); }
+    
+    /* Form fields when flagged bad */
+    .contact-form input.field-invalid { border-color: var(--accent-red) !important; }
 
     /* Compliance Blocks */
     .compliance-section { background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 4rem 0; font-size: 0.9rem; color: #475569; }
@@ -109,6 +115,11 @@
     .btn-cookie-deny { background: #e2e8f0; color: #475569; padding: 0.5rem 1.5rem; border-radius: 4px; font-weight: 600; border: none; cursor: pointer; font-size: 0.85rem; }
     .btn-cookie-deny:hover { background: #cbd5e1; }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(-5px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
     /* Responsive Breakpoints */
     @media (max-width: 968px) {
       .two-col { grid-template-columns: 1fr; gap: 2rem; }
@@ -127,7 +138,6 @@
   <header class="site-header" id="top">
     <div class="container navbar">
       <a href="#top" class="brand" aria-label="Kavor Industries home">
-        <!-- Reverted directly to your actual working vector asset -->
         <img src="favicon.svg" alt="Kavor Industries" />
         <span>
           <strong>Kavor</strong>
@@ -247,7 +257,7 @@
       </div>
     </section>
 
-    <!-- Fixed Unified Single Column Contact Section -->
+    <!-- Contact Section -->
     <section class="section contact" id="contact">
       <div class="container" style="max-width: 650px; margin: 0 auto;">
         <div style="text-align: center; margin-bottom: 3rem;">
@@ -257,16 +267,15 @@
           <p style="font-weight: 700; color: var(--accent-orange); font-size: 1.05rem;">info@kavorindustries.com • Europe • Asia • Global</p>
         </div>
 
-        <!-- Security Warning Fixed: Using safe script handling instead of form action handlers -->
-        <form class="contact-form" id="inquiryForm" onsubmit="handleInquirySubmit(event)">
+        <form class="contact-form" id="inquiryForm" onsubmit="handleInquirySubmit(event)" novalidate>
           <h3 style="margin-top: 0; margin-bottom: 2rem; font-family: 'Montserrat', sans-serif; font-size: 1.4rem; text-align: center; letter-spacing: 0.5px;">Project Inquiry Form</h3>
           
           <label>Full Name 
             <input type="text" id="clientName" placeholder="John Doe" />
           </label>
           
-          <label>Email ID <span class="required-star">*</span><span class="required-note">(Compulsory to submit form)</span>
-            <input type="email" id="clientEmail" class="compulsory-field" placeholder="name@company.com" required />
+          <label>Email ID <span class="required-star">*</span><span id="emailErrorNote" class="error-note">Email ID is required to submit inquiry form.</span>
+            <input type="email" id="clientEmail" placeholder="name@company.com" oninput="clearEmailError()" />
           </label>
           
           <label>Company Name 
@@ -345,26 +354,47 @@
   </footer>
 
   <script>
-    // Safe Native Email Dispatch Script (Bypasses Chrome Mixed Content Alerts)
+    // Logic to clear validation alerts immediately on user input
+    function clearEmailError() {
+      const emailInput = document.getElementById('clientEmail');
+      const errorNote = document.getElementById('emailErrorNote');
+      
+      if (emailInput.value.trim() !== "") {
+        emailInput.classList.remove('field-invalid');
+        errorNote.classList.remove('active');
+      }
+    }
+
+    // Custom Validation and Native Dispatch
     function handleInquirySubmit(event) {
       event.preventDefault();
       
+      const emailInput = document.getElementById('clientEmail');
+      const errorNote = document.getElementById('emailErrorNote');
+      const emailValue = emailInput.value.trim();
+      
+      // If email is missing, flag it instantly and interrupt dispatch
+      if (!emailValue) {
+        emailInput.classList.add('field-invalid');
+        errorNote.classList.add('active');
+        emailInput.focus();
+        return;
+      }
+      
       const name = document.getElementById('clientName').value || "Not Provided";
-      const email = document.getElementById('clientEmail').value;
       const company = document.getElementById('companyName').value || "Not Provided";
       const service = document.getElementById('selectedService').value;
       const details = document.getElementById('inquiryDetails').value;
       
       let bodyText = `Project Inquiry Form Submission:\n\n`;
       bodyText += `Client Name: ${name}\n`;
-      bodyText += `Reply-To Email: ${email}\n`;
+      bodyText += `Reply-To Email: ${emailValue}\n`;
       bodyText += `Company Name: ${company}\n`;
       bodyText += `Service Vertical Required: ${service}\n\n`;
       bodyText += `Inquiry Details:\n${details}\n`;
       
       const mailtoUrl = `mailto:info@kavorindustries.com?subject=${encodeURIComponent('Kavor Project Inquiry - ' + company)}&body=${encodeURIComponent(bodyText)}`;
       
-      // Fires client system intent cleanly without navigating away or raising security alerts
       window.location.href = mailtoUrl;
     }
 
