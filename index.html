@@ -170,11 +170,14 @@
           </div>
         </div>
 
-        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
-          <input type="hidden" name="subject" value="New Inquiry from Kavor Industries Website" />
-          <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
-
+        <!-- Pure HTML Form - No third-party key required -->
+        <form class="contact-form" action="mailto:info@kavorindustries.com" method="POST" enctype="text/plain">
+          <label>Full Name <input type="text" name="Name" required /></label>
+          <label>Email <input type="email" name="Email" required /></label>
+          <label>Company <input type="text" name="Company" /></label>
+          <label>Message <textarea name="Message" rows="5" required></textarea></label>
+          <button type="submit" class="btn">Send Inquiry</button>
+        </form>
           <label>Full Name <input type="text" name="name" required /></label>
           <label>Email <input type="email" name="email" required /></label>
           <label>Company <input type="text" name="company" /></label>
