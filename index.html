@@ -6,51 +6,161 @@
   <title>Kavor Industries | Engineering the Future of Industry</title>
   <meta name="description" content="Kavor Industries delivers engineering expertise, industrial procurement, and global trade solutions for modern businesses." />
   
-  <!-- Points directly to favicon.svg in your main folder -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon.svg" />
+  <!-- SEO & Favicon Configurations for Google Search Indexing -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" sizes="any">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="favicon.png">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0a192f;
+      --bg-light: #f4f6f9;
+      --text-main: #1e293b;
+      --accent-orange: #e17014;
+      --accent-red: #ff4d4d;
+      --border-color: #cbd5e1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; color: var(--text-main); line-height: 1.6; background-color: #ffffff; }
+    
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .btn { display: inline-flex; align-items: center; background: var(--accent-orange); color: #fff; padding: 0.8rem 2rem; border: none; border-radius: 4px; font-weight: 600; text-decoration: none; cursor: pointer; transition: background 0.3s ease; }
+    .btn:hover { background: #c65f0e; }
+    .btn-secondary { background: transparent; border: 2px solid #fff; color: #fff; margin-left: 1rem; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+    /* Header Nav */
+    .site-header { background: var(--bg-dark); color: #fff; position: sticky; top: 0; z-index: 1000; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .navbar { display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; text-decoration: none; color: #fff; gap: 0.5rem; }
+    .brand img { height: 32px; width: 32px; }
+    .brand strong { font-family: 'Montserrat', sans-serif; font-size: 1.3rem; letter-spacing: 1px; }
+    .brand small { display: block; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; }
+    .nav-links a { color: #cbd5e1; text-decoration: none; margin-left: 1.5rem; font-size: 0.95rem; font-weight: 500; }
+    .nav-links a:hover { color: #fff; }
+    .nav-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+
+    /* Hero Section */
+    .hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; padding: 8rem 0; position: relative; text-align: left; }
+    .eyebrow { color: var(--accent-orange); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 1rem; }
+    .hero h1 { font-family: 'Montserrat', sans-serif; font-size: 3.5rem; line-height: 1.2; margin-bottom: 1.5rem; max-width: 800px; }
+    .hero-text { font-size: 1.2rem; color: #94a3b8; max-width: 650px; margin-bottom: 2.5rem; }
+
+    /* Sections Shared layout */
+    .section { padding: 5rem 0; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .section-label { color: var(--accent-orange); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; margin-bottom: 0.5rem; }
+    h2 { font-family: 'Montserrat', sans-serif; font-size: 2.2rem; margin-bottom: 1.5rem; }
+    .bg-light-sec { background-color: var(--bg-light); }
+
+    /* Trust Strip */
+    .trust-strip { background: #0f172a; border-top: 1px solid rgba(255,255,255,0.1); padding: 2rem 0; color: #fff; }
+    .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .trust-grid div { display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; }
+    .trust-grid span { color: var(--accent-orange); font-weight: 700; font-family: 'Montserrat', sans-serif; }
+
+    /* Cards Layout */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .card { background: #fff; padding: 2.5rem 2rem; border-radius: 6px; border: 1px solid #e2e8f0; transition: transform 0.3s ease; }
+    .card:hover { transform: translateY(-5px); }
+    .card .icon { font-size: 2rem; margin-bottom: 1rem; }
+    .card h3 { font-family: 'Montserrat', sans-serif; margin-bottom: 1rem; }
+    .card p { color: #64748b; font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .card a { color: var(--accent-orange); text-decoration: none; font-weight: 600; }
+
+    /* Industry list */
+    .industry-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem; }
+    .industry-grid span { background: #fff; border: 1px solid var(--border-color); padding: 1rem; text-align: center; border-radius: 4px; font-weight: 500; }
+
+    /* Unified Form Styling (Fixed Multi-Column Bug) */
+    .contact-form { background: #0f172a; color: #fff; padding: 3rem; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; text-align: left; }
+    .contact-form label { display: block; margin-bottom: 1.25rem; font-size: 0.9rem; color: #cbd5e1; font-weight: 500; }
+    .contact-form label span.required-star { color: var(--accent-red); font-weight: bold; }
+    .contact-form label span.required-note { font-size: 0.75rem; color: #94a3b8; font-weight: normal; margin-left: 0.5rem; }
+    .contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 0.85rem; margin-top: 0.5rem; border-radius: 4px; border: 1px solid #334155; background: #1e293b; color: #fff; font-family: inherit; font-size: 0.95rem; display: block; }
+    .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent-orange); }
+    .contact-form input.compulsory-field { border: 1px solid var(--accent-red); }
+
+    /* Compliance Blocks */
+    .compliance-section { background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 4rem 0; font-size: 0.9rem; color: #475569; }
+    .compliance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .compliance-grid h4 { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--bg-dark); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .compliance-box { max-height: 200px; overflow-y: auto; background: #fff; padding: 1.5rem; border: 1px solid #e2e8f0; border-radius: 4px; }
+
+    /* Footer */
+    .footer { background: var(--bg-dark); color: #94a3b8; padding: 4rem 0 2rem 0; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); }
+    .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 2rem; margin-bottom: 3rem; }
+    .footer-grid strong { color: #fff; display: block; margin-bottom: 1rem; font-family: 'Montserrat', sans-serif; }
+    .footer-grid a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 0.5rem; }
+    .footer-grid a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem; text-align: center; font-size: 0.8rem; }
+
+    /* Global Sticky Cookie Consent Banner */
+    .cookie-banner { position: fixed; bottom: -200px; left: 50%; transform: translateX(-50%); width: calc(100% - 4rem); max-width: 600px; background: #ffffff; color: var(--text-main); padding: 1.5rem; box-shadow: 0 -10px 40px rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid #e2e8f0; z-index: 9999; display: flex; flex-direction: column; gap: 1rem; transition: bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    .cookie-banner.show { bottom: 2rem; }
+    .cookie-text { font-size: 0.88rem; color: #475569; }
+    .cookie-text a { color: var(--accent-orange); text-decoration: underline; }
+    .cookie-buttons { display: flex; gap: 0.75rem; justify-content: flex-end; }
+    .btn-cookie-accept { background: var(--bg-dark); color: #fff; padding: 0.5rem 1.5rem; border-radius: 4px; font-weight: 600; border: none; cursor: pointer; font-size: 0.85rem; }
+    .btn-cookie-deny { background: #e2e8f0; color: #475569; padding: 0.5rem 1.5rem; border-radius: 4px; font-weight: 600; border: none; cursor: pointer; font-size: 0.85rem; }
+    .btn-cookie-deny:hover { background: #cbd5e1; }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 968px) {
+      .two-col { grid-template-columns: 1fr; gap: 2rem; }
+      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .industry-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .compliance-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.5rem; }
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+    }
+  </style>
 </head>
 <body>
+
   <header class="site-header" id="top">
-    <nav class="navbar">
+    <div class="container navbar">
       <a href="#top" class="brand" aria-label="Kavor Industries home">
-        <img src="favicon.svg" alt="Kavor Industries Logo" />
+        <img src="favicon.png" alt="Kavor Industries" />
         <span>
           <strong>Kavor</strong>
           <small>Industries</small>
         </span>
       </a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-      <div class="nav-links">
+      <button class="nav-toggle" aria-label="Open menu">☰</button>
+      <nav class="nav-links">
         <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#industries">Industries</a>
         <a href="#why">Why Kavor</a>
         <a href="#contact">Contact</a>
-        <a href="#quote" class="btn btn-small">Request a Quote</a>
-      </div>
-    </nav>
+        <a href="#compliance">Legal Info</a>
+      </nav>
+    </div>
   </header>
 
   <main>
+    <!-- Hero Section -->
     <section class="hero">
-      <div class="hero-overlay"></div>
-      <div class="container hero-content">
+      <div class="container">
         <p class="eyebrow">Engineering • Procurement • Global Trade</p>
         <h1>Engineering the Future of Industry.</h1>
         <p class="hero-text">Kavor Industries delivers engineering expertise, industrial procurement, and global trade solutions that help businesses build resilient supply chains and achieve sustainable growth.</p>
         <div class="hero-actions">
-          <a href="#quote" class="btn">Request a Quote</a>
+          <a href="#contact" class="btn">Request a Quote</a>
           <a href="#services" class="btn btn-secondary">Explore Services</a>
         </div>
       </div>
     </section>
 
+    <!-- Value Matrix -->
     <section class="trust-strip">
       <div class="container trust-grid">
         <div><span>01</span><strong>Engineering Expertise</strong></div>
@@ -60,153 +170,111 @@
       </div>
     </section>
 
+    <!-- About Section -->
     <section class="section about" id="about">
       <div class="container two-col">
-        <div class="image-card">
-          <div class="industrial-graphic">
-            <span></span><span></span><span></span>
-          </div>
+        <div style="background: var(--bg-dark); color: #fff; padding: 4rem; border-radius: 8px; text-align: center;">
+          <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 1rem; color: var(--accent-orange);">K</h3>
+          <p style="font-size: 0.9rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px;">Global Operational Integrity</p>
         </div>
         <div>
           <p class="section-label">About Kavor</p>
           <h2>Built for modern industrial business.</h2>
           <p>Kavor Industries is an industrial solutions company specializing in engineering services, procurement, and international trade. We partner with manufacturers, suppliers, and businesses to deliver reliable solutions built on quality, efficiency, and trust.</p>
-          <p>Our approach combines technical understanding with commercial execution, helping clients source better, move faster, and build stronger supply chains.</p>
+          <p style="margin-top: 1rem;">Our approach combines technical understanding with commercial execution, helping clients source better, move faster, and build stronger supply chains.</p>
         </div>
       </div>
     </section>
 
-    <section class="section services" id="services">
+    <!-- Services Section -->
+    <section class="section services bg-light-sec" id="services">
       <div class="container">
-        <div class="section-head">
-          <p class="section-label">Services</p>
-          <h2>Industrial solutions for growing businesses.</h2>
-        </div>
+        <p class="section-label">Services</p>
+        <h2>Industrial solutions for growing businesses.</h2>
         <div class="cards">
           <article class="card">
             <div class="icon">⚙</div>
             <h3>Engineering Services</h3>
             <p>Engineering consulting, technical documentation, CAD support, and process improvement for industrial projects.</p>
-            <a href="#contact">Learn more →</a>
+            <a href="#contact">Inquire Now →</a>
           </article>
           <article class="card">
             <div class="icon">📦</div>
             <h3>Industrial Procurement</h3>
             <p>Sourcing industrial equipment, spare parts, mechanical components, electrical parts, and safety products.</p>
-            <a href="#contact">Learn more →</a>
+            <a href="#contact">Inquire Now →</a>
           </article>
           <article class="card">
             <div class="icon">🌍</div>
             <h3>Global Trade</h3>
             <p>International sourcing, import-export support, supplier coordination, and supply chain assistance.</p>
-            <a href="#contact">Learn more →</a>
-          </article>
-          <article class="card">
-            <div class="icon">🤝</div>
-            <h3>Industrial Consulting</h3>
-            <p>Procurement strategy, project coordination, supplier development, and operational support.</p>
-            <a href="#contact">Learn more →</a>
+            <a href="#contact">Inquire Now →</a>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- Industries Sector Matrix -->
     <section class="section industries" id="industries">
       <div class="container">
-        <div class="section-head">
-          <p class="section-label">Industries</p>
-          <h2>Serving essential industrial sectors.</h2>
-        </div>
+        <p class="section-label">Industries</p>
+        <h2>Serving essential industrial sectors.</h2>
         <div class="industry-grid">
           <span>Automotive</span>
           <span>Manufacturing</span>
           <span>Construction</span>
-          <span>Warehousing & Logistics</span>
+          <span>Logistics & Supply Chain</span>
           <span>Food & Beverage</span>
           <span>Renewable Energy</span>
-          <span>Packaging</span>
-          <span>Industrial Equipment</span>
+          <span>Packaging Matrix</span>
+          <span>Industrial Tooling</span>
         </div>
       </div>
     </section>
 
-    <section class="section why" id="why">
+    <!-- Value Pillar Section -->
+    <section class="section why bg-light-sec" id="why">
       <div class="container two-col">
         <div>
           <p class="section-label">Why Choose Kavor</p>
           <h2>Reliable execution with a global mindset.</h2>
           <p>We focus on long-term business relationships, transparent communication, and practical industrial solutions that support real operational needs.</p>
         </div>
-        <div class="why-list">
-          <div><strong>Technical Expertise</strong><p>Engineering knowledge applied to real business challenges.</p></div>
-          <div><strong>Supplier Network</strong><p>Global sourcing support for industrial products and components.</p></div>
-          <div><strong>Quality Focus</strong><p>Solutions built around reliability, consistency, and performance.</p></div>
-          <div><strong>Customer Commitment</strong><p>Professional communication and partnership-focused service.</p></div>
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <div><strong>Technical Expertise</strong><p style="color: #64748b; font-size: 0.95rem;">Engineering knowledge applied to real business challenges.</p></div>
+          <div><strong>Supplier Network</strong><p style="color: #64748b; font-size: 0.95rem;">Global sourcing support for industrial products and components.</p></div>
         </div>
       </div>
     </section>
 
-    <section class="quote-banner" id="quote">
-      <div class="container">
-        <p class="section-label">Request a Quote</p>
-        <h2>Ready to discuss your next industrial project?</h2>
-        <p>Tell us what you need, and Kavor Industries will help you explore the right engineering, procurement, or trade solution.</p>
-        <a href="mailto:info@kavorindustries.com" class="btn">Email Us</a>
-      </div>
-    </section>
-
+    <!-- Fixed Unified Single Column Contact Section -->
     <section class="section contact" id="contact">
-      <div class="container two-col">
-        <div>
+      <div class="container" style="max-width: 650px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 3rem;">
           <p class="section-label">Contact</p>
           <h2>Start a conversation.</h2>
-          <p>For procurement requests, engineering support, or international sourcing inquiries, contact Kavor Industries.</p>
-          <div class="contact-box">
-            <strong>Email</strong>
-            <a href="mailto:info@kavorindustries.com">info@kavorindustries.com</a>
-          </div>
-          <div class="contact-box">
-            <strong>Markets</strong>
-            <span>Europe • Asia • Global</span>
-          </div>
+          <p style="color: #475569; margin-bottom: 1rem;">For procurement requests, engineering support, or international sourcing inquiries, contact Kavor Industries directly via this secure intake form.</p>
+          <p style="font-weight: 700; color: var(--accent-orange); font-size: 1.05rem;">info@kavorindustries.com • Europe • Asia • Global</p>
         </div>
 
-        <!-- Modernized Professional Inquiry Form via Formspree -->
-       <!-- Modernized Professional Inquiry Form - 100% No Account Required -->
+        <!-- Fully Realigned Single Column Native Intake Form -->
         <form class="contact-form" action="mailto:info@kavorindustries.com" method="POST" enctype="text/plain">
-          <h3 style="margin-top: 0; margin-bottom: 1.5rem; font-family: 'Montserrat', sans-serif;">Project Inquiry Form</h3>
+          <h3 style="margin-top: 0; margin-bottom: 2rem; font-family: 'Montserrat', sans-serif; font-size: 1.4rem; text-align: center; letter-spacing: 0.5px;">Project Inquiry Form</h3>
           
           <label>Full Name 
-            <input type="text" name="Name" placeholder="John Doe" />
+            <input type="text" name="Client Name" placeholder="John Doe" />
           </label>
           
-          <label>Email ID <span style="color: #ff4d4d; font-weight: bold;">*</span> <span style="font-size: 0.8rem; color: #777;">(Compulsory to submit form)</span>
-            <input type="email" name="Email" placeholder="name@company.com" required style="border: 1px solid #ff4d4d;" />
-          </label>
-          
-          <label>Company Name 
-            <input type="text" name="Company" placeholder="Company Ltd." />
-          </label>
-          
-          <label>Message 
-            <textarea name="Message" rows="5" placeholder="How can we assist your business operations?" required></textarea>
-          </label>
-          
-          <button type="submit" class="btn" style="width: 100%; justify-content: center; margin-top: 1rem;">Send Inquiry →</button>
-        </form>          <label>Full Name 
-            <input type="text" name="name" placeholder="John Doe" />
-          </label>
-          
-          <label>Email ID <span style="color: #ff4d4d; font-weight: bold;">*</span> <span style="font-size: 0.8rem; color: #777;">(Compulsory to submit form)</span>
-            <input type="email" name="_replyto" placeholder="name@company.com" required style="border: 1px solid #ff4d4d;" />
+          <label>Email ID <span class="required-star">*</span><span class="required-note">(Compulsory to submit form)</span>
+            <input type="email" name="Reply-To Email" class="compulsory-field" placeholder="name@company.com" required />
           </label>
           
           <label>Company Name 
-            <input type="text" name="company" placeholder="Company Ltd." />
+            <input type="text" name="Company Name" placeholder="Company Ltd." />
           </label>
           
-          <label>Service Required
-            <select name="service">
+          <label>Service Vertical Required
+            <select name="Selected Service">
               <option>Engineering Services</option>
               <option>Industrial Procurement</option>
               <option>Global Trade</option>
@@ -214,46 +282,91 @@
             </select>
           </label>
           
-          <label>Message 
-            <textarea name="message" rows="5" placeholder="How can we assist your business operations?" required></textarea>
+          <label>Message Content
+            <textarea name="Inquiry Details" rows="5" placeholder="Describe your logistics, timeline, or engineering needs..." required></textarea>
           </label>
           
-          <button type="submit" class="btn" style="width: 100%; justify-content: center; margin-top: 1rem;">Send Inquiry →</button>
+          <button type="submit" class="btn" style="width: 100%; justify-content: center; margin-top: 1rem; padding: 1rem;">Send Inquiry →</button>
         </form>
+      </div>
+    </section>
+
+    <!-- Compliance Section (Terms and Privacy Layout) -->
+    <section class="compliance-section" id="compliance">
+      <div class="container compliance-grid">
+        <div>
+          <h4>Terms & Conditions</h4>
+          <div class="compliance-box">
+            <p><strong>1. Acceptance of Terms:</strong> By accessing and using kavorindustries.com, you agree to comply with and be bound by these corporate Terms and Conditions. If you disagree with any segment, please discontinue use.</p>
+            <p style="margin-top: 0.75rem;"><strong>2. Service Scope:</strong> Kavor Industries acts as an industrial solutions consultant and procurement intermediary. Quotations provided through electronic intake channels do not constitute legally binding commercial execution contracts until structured service level parameters are manually finalized.</p>
+          </div>
+        </div>
+        <div>
+          <h4>Privacy Policy & GDPR</h4>
+          <div class="compliance-box">
+            <p><strong>1. Data Collection:</strong> Information submitted voluntarily via our inquiry form is used purely to communicate operational responses. We do not track profiles or trade identities across advertising channels.</p>
+            <p style="margin-top: 0.75rem;"><strong>2. Cookie Metrics:</strong> This site utilizes minimal client-side web configurations solely to preserve operational layout states and consent indicators. No sensitive geographic coordinates or tracker data profiles are collected.</p>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
+  <!-- Cookie Consent Banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-text">
+      We use basic functional parameters to optimize your global compliance layout experience. By clicking "Accept", you acknowledge our <a href="#compliance">Terms & Conditions</a>.
+    </div>
+    <div class="cookie-buttons">
+      <button class="btn-cookie-deny" id="btnDeny">Deny</button>
+      <button class="btn-cookie-accept" id="btnAccept">Accept</button>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="container footer-grid">
       <div>
-        <a href="#top" class="brand footer-brand">
-          <img src="favicon.svg" alt="Kavor Industries Logo" />
-          <span><strong>Kavor</strong><small>Industries</small></span>
-        </a>
-        <p>Engineering the Future of Industry.</p>
+        <strong style="font-size: 1.2rem; color: #fff;">Kavor Industries</strong>
+        <p style="margin-top: 0.5rem; color: #64748b;">Engineering structural procurement matrix configurations globally.</p>
       </div>
       <div>
-        <strong>Quick Links</strong>
+        <strong>Navigation</strong>
         <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#industries">Industries</a>
       </div>
       <div>
-        <strong>Services</strong>
-        <a href="#services">Engineering</a>
-        <a href="#services">Procurement</a>
-        <a href="#services">Global Trade</a>
-      </div>
-      <div>
-        <strong>Contact</strong>
-        <a href="mailto:info@kavorindustries.com">info@kavorindustries.com</a>
-        <span>Europe • Asia • Global</span>
+        <strong>Legal Hub</strong>
+        <a href="#compliance">Terms of Service</a>
+        <a href="#compliance">Privacy Core</a>
       </div>
     </div>
     <div class="footer-bottom">© 2026 Kavor Industries. All rights reserved.</div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // Cookie Banner Local Storage Logic
+    document.addEventListener("DOMContentLoaded", function() {
+      const banner = document.getElementById("cookieBanner");
+      const acceptBtn = document.getElementById("btnAccept");
+      const denyBtn = document.getElementById("btnDeny");
+
+      if (!localStorage.getItem("kavor_cookie_consent")) {
+        setTimeout(() => {
+          banner.classList.add("show");
+        }, 1200);
+      }
+
+      acceptBtn.addEventListener("click", function() {
+        localStorage.setItem("kavor_cookie_consent", "accepted");
+        banner.classList.remove("show");
+      });
+
+      denyBtn.addEventListener("click", function() {
+        localStorage.setItem("kavor_cookie_consent", "denied");
+        banner.classList.remove("show");
+      });
+    });
+  </script>
 </body>
 </html>
